@@ -35,31 +35,31 @@ function presentByOccupation() {
     }
 
     occupations = getOccupations()
-
-    res={}
+    list=[]
+    res = {}
     for(occ of occupations) {
         prop = occ.toString()
-        Object.defineProperty(res,prop,{
-            value: [],
-            enumerable: true,
-            writable : true
-        })
-        info=[]
+        info = []
         for(o of myObj) {
             if(o.occupation==occ) {
                 var newObj = {
                     name : o.name,
                     age : o.age
                 }
-                console.log()
-                // console.log(typeof res[prop])
-                // res[prop].push(newObj)
+                info.push(newObj)
             }
         }
-        res.push(info)
+        list.push(info)
+        // Object.defineProperty(res,prop,{
+        //     value:[]
+        // })
     }
-    console.log(res.getOwnProperty())
-    return res
+
+    console.log({
+        'Team Leader': list[0],
+        'Programmer': list[1]
+    })
+    // console.log(res)
 }
 
 function getListOfNames() {
@@ -70,10 +70,11 @@ function getListOfNames() {
     console.log(res)
 }
 
-console.log('list of programmers: ')
+console.log('list of programmers:\n ')
 getListOfProgrammars()
-console.log('sorted list of people: \n')
+console.log('\nsorted list of people: \n')
 sortListOfPeoples()
-// presentByOccupation()
-console.log('list of names:\n')
+console.log('\npresented by ...:\n')
+presentByOccupation()
+console.log('\nlist of names:\n')
 getListOfNames()
