@@ -22,14 +22,13 @@ function sortListOfPeoples(){
         return person2.age-person1.age;
     })
     console.log(myObj)
-    // return myObj
 }
 
 function presentByOccupation() {
 
     function getOccupations() {
         var mp = new Map();
-        myObj.forEach(function(obj,id){
+        myObj.forEach(function(obj){
             mp.set(obj.occupation,0);
         })
         return mp.keys();
@@ -37,10 +36,14 @@ function presentByOccupation() {
 
     occupations = getOccupations()
 
-    console.log(occupations)
-
     res={}
     for(occ of occupations) {
+        prop = occ.toString()
+        Object.defineProperty(res,prop,{
+            value: [],
+            enumerable: true,
+            writable : true
+        })
         info=[]
         for(o of myObj) {
             if(o.occupation==occ) {
@@ -48,16 +51,29 @@ function presentByOccupation() {
                     name : o.name,
                     age : o.age
                 }
-                info.push(newObj);
+                console.log()
+                // console.log(typeof res[prop])
+                // res[prop].push(newObj)
             }
         }
         res.push(info)
     }
+    console.log(res.getOwnProperty())
     return res
 }
 
-// console.log('list of programmers: ')
-// getListOfProgrammars()
-// console.log('sorted list of people: \n')
-// sortListOfPeoples()
-presentByOccupation()
+function getListOfNames() {
+    res=[]
+    myObj.map(function(x){
+        res.push(x.name)
+    })
+    console.log(res)
+}
+
+console.log('list of programmers: ')
+getListOfProgrammars()
+console.log('sorted list of people: \n')
+sortListOfPeoples()
+// presentByOccupation()
+console.log('list of names:\n')
+getListOfNames()
